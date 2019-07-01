@@ -29,4 +29,31 @@ class Solution {
         
         return ans;
     }
+    
+    /*
+        // O(N^2) solution
+        
+        Set<Integer> set = new HashSet<>();
+        
+        for(int num1 : nums1)
+            for(int num2 : nums2)
+                if(num1 == num2)
+                    set.add(num1);
+        
+        // turn set into int[] array
+        int[] ans = new int[set.size()];
+        
+        Iterator it = set.iterator();
+        
+        int i = 0;
+        while(it.hasNext())
+        {
+            ans[i] = (Integer) it.next();
+            i++;
+        }
+        
+        return ans;
+    }
+    */
+    
 }
