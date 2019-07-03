@@ -26,4 +26,39 @@ class Solution {
         // if it didn't find any letter with occurence 1, return -1
         return -1;
     }
+    
+    /*
+    public int firstUniqChar(String s) {
+        
+        // O(N^2) solution: go through each letter, and for each letter, check every other letter to see if it occurs again
+        
+        char[] sArray = s.toCharArray();
+        
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(sArray[i] == 0)
+                continue;
+            
+            char cur = sArray[i];
+            boolean foundAnother = false;
+            
+            for(int j = i + 1; j < s.length(); j++)
+            {
+                if(sArray[j] == 0)
+                    continue;
+                
+                if(s.charAt(j) == cur)
+                {
+                    sArray[j] = 0;
+                    foundAnother = true;
+                }
+            }
+            
+            if(!foundAnother)
+                return i;
+        }
+        
+        return -1;
+    }
+    */
 }
