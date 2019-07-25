@@ -31,18 +31,16 @@ class Solution {
     
     public void find(char[][] board, int r, int c, char[] letters, int index, boolean[][] visited)
     {
-        if(index > 300)
-        {
+        /*
         System.out.println("find(): ****");
         System.out.println(r + " " + c);
         System.out.println(index);
         System.out.println(Arrays.deepToString(visited).replace("],","\n").replace("false","_").replace("true","X"));
         System.out.println("*****");
-        }
+        */
         
         if(index == letters.length)
         {
-            System.out.println(r + " " + c);
             found = true;
             return;
         }
