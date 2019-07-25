@@ -1,0 +1,81 @@
+/*
+https://leetcode.com/problems/word-search/
+*/
+
+// Time Limit exceeds but correct solution
+
+class Solution {
+    boolean found = false;
+    
+    public boolean exist(char[][] board, String word) {
+        
+        char[] letters = word.toCharArray();
+        
+        int index = 0;
+        
+        for(int r = 0; r < board.length; r++)
+        {
+            for(int c = 0; c < board[0].length; c++)
+            {
+                if(board[r][c] == letters[index])
+                {
+                    find(board, r, c, letters, index + 1, new boolean[board.length][board[0].length]);
+                }
+            }
+        }
+        
+        
+        return found;
+        
+    }
+    
+    public void find(char[][] board, int r, int c, char[] letters, int index, boolean[][] visited)
+    {
+        if(index > 300)
+        {
+        System.out.println("find(): ****");
+        System.out.println(r + " " + c);
+        System.out.println(index);
+        System.out.println(Arrays.deepToString(visited).replace("],","\n").replace("false","_").replace("true","X"));
+        System.out.println("*****");
+        }
+        
+        if(index == letters.length)
+        {
+            System.out.println(r + " " + c);
+            found = true;
+            return;
+        }
+        
+        if(visited[r][c])
+            return;
+        
+        if(inBounds(board, r, c))
+            visited[r][c] = true;
+        
+        // check all four sides for letters[index]
+        
+        if( inBounds(board, r - 1, c) && !visited[r - 1][c] && board[r - 1][c] == letters[index])
+            find(board, r - 1, c, letters, index + 1, visited);
+        if( inBounds(board, r, c - 1) && !visited[r][c - 1] && board[r][c - 1] == letters[index])
+            find(board, r, c - 1, letters, index + 1, visited);
+        if( inBounds(board, r, c + 1) && !visited[r][c + 1] && board[r][c + 1] == letters[index])
+            find(board, r, c + 1, letters, index + 1, visited);
+        if( inBounds(board, r + 1, c) && !visited[r + 1][c] && board[r + 1][c] == letters[index])
+            find(board, r + 1, c, letters, index + 1, visited);
+        
+            
+            
+        
+        visited[r][c] = false;
+    }
+    
+    public boolean inBounds(char[][] board, int r, int c)
+    {
+        if(r >= 0 && r < board.length && c >= 0 && c < board[0].length)
+            return true;
+        else
+            return false;
+    }
+    
+}
