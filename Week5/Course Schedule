@@ -63,7 +63,7 @@ class Solution {
         ArrayList <Integer> L = new ArrayList<Integer>(); 
         
         
-        while(!q.isEmpty()) 
+        while(!S.isEmpty()) 
         { 
             // Take node from front of queue
             // and add it to the end of list L 
@@ -78,7 +78,7 @@ class Solution {
 
                     // If in-degree becomes zero, add it to queue 
                     if(--indegree[node] == 0) 
-                        q.add(node); 
+                        S.add(node); 
                 } 
             cnt++; 
         } 
@@ -91,6 +91,5 @@ class Solution {
         // If count differs from the number of courses, there is a cycle
         // if they are equal, there is no cycle in the graph
         return cnt == numCourses;
-    }
-    
+    }  
 }
