@@ -1,0 +1,248 @@
+/*
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
+*/
+
+/*
+Passes 135/138 test cases
+Time Limit Exceeds
+*/
+class Solution {
+    int count = 0;
+    int overAllCount = 0;
+    
+    // stores max path at each spot in matrix,
+    // max it can travel in an increasing path starting from that spot
+    int[][] m; 
+    
+    public int longestIncreasingPath(int[][] matrix) {
+        if(matrix.length == 0)
+            return 0;
+        
+        m = new int[matrix.length][matrix[0].length];
+        for(int[] row : m)
+            Arrays.fill(row, -1);
+        
+        
+        for(int r = 0; r < matrix.length; r++)
+        {
+            for(int c = 0; c < matrix[0].length; c++)
+            {
+                
+                howFarCanItGo(matrix, r, c, 0);
+                m[r][c] = count;
+                overAllCount = Math.max(count, overAllCount);
+                count = 0;
+            }
+        }
+        
+        
+        System.out.println(Arrays.deepToString(m).replace("],","\n"));
+        return overAllCount + 1;
+    }
+    
+    public void howFarCanItGo(int[][] matrix, int r, int c, int ct)
+    {
+        
+        
+        if(ct > count)
+            count = ct;
+        
+        
+        if(inBounds(matrix, r - 1, c) && matrix[r-1][c] > matrix[r][c])
+            howFarCanItGo(matrix, r - 1, c, ct + 1);
+
+        if(inBounds(matrix, r + 1, c) && matrix[r+1][c] > matrix[r][c])
+            howFarCanItGo(matrix, r + 1, c, ct + 1);
+
+        if(inBounds(matrix, r, c - 1) && matrix[r][c-1] > matrix[r][c])
+            howFarCanItGo(matrix, r, c - 1, ct + 1);
+
+        if(inBounds(matrix, r, c + 1) && matrix[r][c+1] > matrix[r][c])
+            howFarCanItGo(matrix, r, c + 1, ct + 1);
+        
+        
+    }
+    
+    
+    public boolean outOfBounds(int[][] matrix, int r, int c)
+    {
+        return r < 0 || c < 0 || r >= matrix.length || c >= matrix[0].length;
+    }
+    
+    public boolean inBounds(int[][] matrix, int r, int c)
+    {
+        return r >= 0 && c >= 0 && r < matrix.length && c < matrix[0].length;
+    }
+}
+
+/*
+class Solution {
+    
+    int maxCt = 0;
+    int max = 0;
+    
+    int[][] memoizedVal;
+    boolean[][] memoized;
+    
+    public int longestIncreasingPath(int[][] matrix) {
+        if(matrix.length == 0)
+            return 0;
+        
+        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        memoizedVal = new int[matrix.length][matrix[0].length];
+        memoized = new boolean[matrix.length][matrix[0].length];
+        
+        for(int[] row : memoizedVal)
+            Arrays.fill(row, -1);
+        
+        
+        for(int r = 0; r < matrix.length; r++)
+        {
+            for(int c = 0; c < matrix[0].length; c++)
+            {
+                findPathIncreasing(matrix, r, c, 0);
+                memoizedVal[r][c] = max;
+                max = 0;
+                 
+            }
+        }
+        
+        System.out.println(Arrays.deepToString(memoizedVal).replace("],","\n"));
+        
+        return maxCt + 1;
+    }
+    
+    public void findPathIncreasing(int[][] matrix, int r, int c, int ct)
+    {
+        if(memoizedVal[r][c] != -1)
+            if(memoizedVal[r][c] + 1 > maxCt)
+            {
+                maxCt = memoizedVal[r][c] + 1;
+                return;
+            }
+        
+        if (ct > maxCt)
+            maxCt = ct;
+        
+        if(ct > max)
+            max = ct;
+        
+      //  int[] paths = new int[4];
+        
+      //  if(memoized[r][c] != 0)
+       //     return memoized[r][c];
+        
+        if(inBounds(matrix, r - 1, c) && matrix[r-1][c] > matrix[r][c])
+            findPathIncreasing(matrix, r - 1, c, ct + 1);
+        
+        if(inBounds(matrix, r + 1, c) && matrix[r+1][c] > matrix[r][c])
+            findPathIncreasing(matrix, r + 1, c, ct + 1);
+        
+        if(inBounds(matrix, r, c - 1) && matrix[r][c-1] > matrix[r][c])
+           findPathIncreasing(matrix, r, c - 1, ct + 1);
+        
+        if(inBounds(matrix, r, c + 1) && matrix[r][c+1] > matrix[r][c])
+            findPathIncreasing(matrix, r, c + 1, ct + 1);
+      
+        
+        int max = paths[0];
+        for(int i = 1; i < 4; i++)
+            if(paths[i] > max)
+                max = paths[i];
+        
+        memoizedVal[r][c] = max;
+        memoized[r][c] = true;
+        
+       // System.out.println(r + " " + c + " " + Arrays.toString(paths));
+        return ct;
+        
+        
+    }
+    
+    public boolean outOfBounds(int[][] matrix, int r, int c)
+    {
+        return r < 0 || c < 0 || r >= matrix.length || c >= matrix[0].length;
+    }
+    
+    public boolean inBounds(int[][] matrix, int r, int c)
+    {
+        return r >= 0 && c >= 0 && r < matrix.length && c < matrix[0].length;
+    }
+}
+*/
+
+/*
+class Solution {
+    
+    int maxCt = 0;
+    
+    int[][] memoized;
+    
+    public int longestIncreasingPath(int[][] matrix) {
+        if(matrix.length == 0)
+            return 0;
+      //  boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        memoized = new int[matrix.length][matrix[0].length];
+        int max = 0;
+        
+        for(int r = 0; r < matrix.length; r++)
+        {
+            for(int c = 0; c < matrix[0].length; c++)
+            {
+                int longestPath = findPathIncreasing(matrix, r, c, 0);
+                
+                if(longestPath > max)
+                    max = longestPath;
+                 
+            }
+        }
+        
+        System.out.println(Arrays.deepToString(memoized).replace("],","\n"));
+        
+        return maxCt + 1;
+    }
+    
+    public int findPathIncreasing(int[][] matrix, int r, int c, int ct)
+    {
+        if (ct > maxCt)
+            maxCt = ct;
+        
+        int[] paths = new int[4];
+        
+      //  if(memoized[r][c] != 0)
+       //     return memoized[r][c];
+        
+        if(inBounds(matrix, r - 1, c) && matrix[r-1][c] > matrix[r][c])
+            paths[0] += findPathIncreasing(matrix, r - 1, c, ct + 1);
+        
+        if(inBounds(matrix, r + 1, c) && matrix[r+1][c] > matrix[r][c])
+            paths[1] += findPathIncreasing(matrix, r + 1, c, ct + 1);
+        
+        if(inBounds(matrix, r, c - 1) && matrix[r][c-1] > matrix[r][c])
+            paths[2] += findPathIncreasing(matrix, r, c - 1, ct + 1);
+        
+        if(inBounds(matrix, r, c + 1) && matrix[r][c+1] > matrix[r][c])
+            paths[3] += findPathIncreasing(matrix, r, c + 1, ct + 1);
+        
+        int max = paths[0];
+        for(int i = 1; i < 4; i++)
+            if(paths[i] > max)
+                max = paths[i];
+        
+        memoized[r][c] = max;
+        
+        return ct;
+        
+    }
+    
+    public boolean outOfBounds(int[][] matrix, int r, int c)
+    {
+        return r < 0 || c < 0 || r >= matrix.length || c >= matrix[0].length;
+    }
+    
+    public boolean inBounds(int[][] matrix, int r, int c)
+    {
+        return r >= 0 && c >= 0 && r < matrix.length && c < matrix[0].length;
+    }
+}
+*/
