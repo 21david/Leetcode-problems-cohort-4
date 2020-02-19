@@ -3,10 +3,51 @@ https://leetcode.com/problems/sort-characters-by-frequency/
 */
 
 class Solution {
-    public String frequencySort(String s) {
+     public String frequencySort(String s) {
+        // Accepted
+        // 4 ms, faster than 98.45%
+        // 41.4 mb, less than 7.41%
+        
+        // This method uses StringBuilder
+         
+        char[] chars = new char[128];
+        int[] freq = new int[128];
+        
+        for(char c : s.toCharArray())
+        {
+            chars[c] = c;
+            freq[c]++;
+        }
+        
+        // sort the freq array decreasing, and make the exact same sorting on the chars array
+        quickSort(freq, chars);
+        
+        
+        // Construct the final string
+        StringBuilder output = new StringBuilder();
+        int i = 0; 
+        while(i < 128)
+        {
+            if(freq[i] == 0)
+                break;
+            
+            // add the corresponding number of characters to the string
+            for(int j = 0; j < freq[i]; j++)
+                output.append(chars[i]);
+            
+            i++;
+        
+        }
+        
+        return output.toString();
+    }
+    
+    public String frequencySortString(String s) {
         // Accepted
         // 524 ms, faster than 5.04%
-        // 42.6 mb, less than 7.41%
+        // 42.3 mb, less than 7.41%
+        
+        // This method uses a strings and string concatenation
         
         
         char[] chars = new char[128];
