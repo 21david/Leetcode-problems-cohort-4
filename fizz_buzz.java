@@ -1,9 +1,9 @@
 class Solution {
     public List<String> fizzBuzz(int n) {
-        // 7 ms, faster than 25.27%
-        // 40.7 mb, less than 46.48%
+        // 1 ms, faster than 99.71%
+        // 40.7 mb, less than 53.17%
         
-        ArrayList<String> answer = new ArrayList<>();
+        List<String> answer = new ArrayList<String>();
         
         for(int i = 1; i <= n; i++)
         {
@@ -14,7 +14,7 @@ class Solution {
             else if(i % 5 == 0)
                 answer.add("Buzz");
             else
-                answer.add("" + i);
+                answer.add(Integer.toString(i));
         }
         
         return answer;
