@@ -1,5 +1,8 @@
 class Solution {
     public boolean detectCapitalUse(String word) {
+        // 2 ms, faster than 36.98%
+        // 39.4 mb, less than 13.27%
+        
         /*
         
         We must return true only for the following cases:
