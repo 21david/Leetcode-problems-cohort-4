@@ -26,4 +26,28 @@ class Solution {
         
         return oneCount == 1;
     }
+    
+    public boolean isPowerOfTwo2(int n) {
+        // Accepted
+        // 1 ms, faster than 100%
+        // 37.1 mb, less than 7.32%
+        
+        /*
+        Another solution:
+        We start from 1, and multiply by 2 until we either reach the input number
+        or pass it. If we reach the input number exactly, return true. If we pass it,
+        we can return false.
+        */
+        
+        int test = 1;
+        
+        while(test > 0 && test <= n)
+        {
+            if (test == n)
+                return true;
+            test <<= 1;
+        } 
+        
+        return false;
+    }
 }
