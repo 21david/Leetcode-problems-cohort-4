@@ -1,12 +1,29 @@
 class Solution {
     public boolean isPowerOfTwo(int n) {
-        // 8 ms, faster than 7.28%
-        // 38.8 mb, less than 5.24%
+        // 1 ms, faster than 100%
+        // 37.1 mb, less than 23.33%
         
-        // If a number is a power of two, it's binary representation will only have exactly one 1.
-        // (Only edge case is that the minimum integer value also only has one 1, but it is negative.)
-        // We can use this to write a one line solution.
+        /*
+        If a positive number is a power of two, it's binary representation will have
+        exactly one 1.
+        We can check through each bit, counting all the 1s, to find out if a number
+        is a power of 2.
+        We can do this by checking the last bit of a number ((n & 1) gives you the last bit),
+        then shifting the number to the right by 1 ( n >>= 1 ), and doing this until 
+        the number becomes 0 ( while(n > 0) ).
+        If we counted more than one 1, then the number is not a pwoer of 2. Otherwise, it is.
+        */
         
-        return Integer.toBinaryString(n).replace("0","").length() == 1 && n != Integer.MIN_VALUE;
+        int oneCount = 0;
+        
+        while(n > 0)
+        {
+            if((n & 1) == 1)
+                oneCount++;
+            
+            n >>= 1;
+        }
+        
+        return oneCount == 1;
     }
 }
