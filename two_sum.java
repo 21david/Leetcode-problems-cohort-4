@@ -1,8 +1,8 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         
-        // 13 ms, faster than 40.34%
-        // 44.9 mb, less than 5.04%
+        // 2 ms, faster than 71.70%
+        // 39.5 mb, less than 77.37%
         
         /*
         O(N) solution:
@@ -13,19 +13,21 @@ class Solution {
         two numbers that add up to target. The iteration is O(N) in the worst case.
         */
         
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         
-        for(int i = 0; i < nums.length; i++)
-            hashMap.put(nums[i], i);
+        for (int i = 0; i < nums.length; i++)
+            map.put(nums[i], i);
         
-        System.out.println(hashMap);
+        int complement;
         
-        for(int i = 0; i < nums.length; i++)
+        for (int i = 0; i < nums.length; i++)
         {
-            if(hashMap.containsKey(target - nums[i]) && hashMap.get(target - nums[i]) != i)
-                return new int[] {i, hashMap.get(target - nums[i])};
+            complement = target - nums[i];
+            
+            if (map.containsKey(complement) && map.get(complement) != i)
+                return new int[] { i, map.get(complement) };
         }
         
-        return null;
+        throw new IllegalArgumentException("No two sum solution");
     }
 }
