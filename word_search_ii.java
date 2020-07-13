@@ -5,7 +5,7 @@
 
 class Solution {
 	
-	public HashSet<String> wordsSet = new HashSet<>();
+    public HashSet<String> wordsSet = new HashSet<>();
 	
     public List<String> findWords(char[][] board, String[] words) 
     {
@@ -22,8 +22,7 @@ class Solution {
         
         // we need to iterate through every character in the board
         // only starting a search if that letter is a child of 'root'
-        // if it is a child, keep searching recursively in all 4 directions
-        // for the rest of the letters
+        // if it is a child, keep searching recursively in all 4 directions for the rest of the letters
         // if we find all the letters, add that word to 'foundWords'
         
         outer:
@@ -45,39 +44,30 @@ class Solution {
                 	visited[r][c] = true;
                 	
                     search(board, r + 1, c, trie.root.get(board[r][c]), foundWords, new StringBuilder("" + board[r][c]), visited);
-                 //   if(!outOfBounds(board, r+1, c))  visited[r+1][c] = false;
                     
                     visited = new boolean[board.length][board[0].length];
                 	visited[r][c] = true;
                     
                     search(board, r - 1, c, trie.root.get(board[r][c]), foundWords, new StringBuilder("" + board[r][c]), visited);
-                 //   if(!outOfBounds(board, r-1, c))  visited[r-1][c] = false;
                     
                     visited = new boolean[board.length][board[0].length];
                 	visited[r][c] = true;
                     
                     search(board, r, c + 1, trie.root.get(board[r][c]), foundWords, new StringBuilder("" + board[r][c]), visited);
-                 //   if(!outOfBounds(board, r, c+1))  visited[r][c+1] = false;
                     
                     visited = new boolean[board.length][board[0].length];
                 	visited[r][c] = true;
                     
                     search(board, r, c - 1, trie.root.get(board[r][c]), foundWords, new StringBuilder("" + board[r][c]), visited);
-                //    if(!outOfBounds(board, r, c-1))  visited[r][c-1] = false;
                 }
-                
-                
                 
             }
         }
-        
         
         ArrayList<String> answer = new ArrayList<>(foundWords);
         
         return answer;
     }
-    
-    
     
     
     /*
@@ -97,42 +87,31 @@ class Solution {
             if(trieNode.get(board[r][c]).endOfWord == true)
             {
             	String newWord = word.append(board[r][c]).toString();
-            	if(word.length() <= board.length * board[0].length  && wordsSet.contains(newWord))
+            	if((word.length() <= (board.length*board[0].length)) && wordsSet.contains(newWord))
             		foundWords.add(newWord);
                 word.deleteCharAt(word.length() - 1);
             }
             
             search(board, r + 1, c, trieNode.get(board[r][c]), foundWords, word.append(board[r][c]), visited);
             word.deleteCharAt(word.length() - 1);
-        //    if(!outOfBounds(board, r+1, c))  visited[r+1][c] = false;
             
             search(board, r - 1, c, trieNode.get(board[r][c]), foundWords, word.append(board[r][c]), visited);
             word.deleteCharAt(word.length() - 1);
-        //    if(!outOfBounds(board, r-1, c))visited[r-1][c] = false;
             
             search(board, r, c + 1, trieNode.get(board[r][c]), foundWords, word.append(board[r][c]), visited);
             word.deleteCharAt(word.length() - 1);
-        //    if(!outOfBounds(board, r, c+1))visited[r][c+1] = false;
             
             search(board, r, c - 1, trieNode.get(board[r][c]), foundWords, word.append(board[r][c]), visited);
             word.deleteCharAt(word.length() - 1);
-        //    if(!outOfBounds(board, r, c-1))visited[r][c-1] = false;
-            
-    //        allFailed = true;
         }
-        	visited[r][c] = false;
-        	
-        //	if(word.length() >= 2)
-        //		word.deleteCharAt(word.length() - 1);
-        //    word.deleteCharAt(word.length() - 1);
-        	
+        
+        visited[r][c] = false;
     }
     
     public boolean outOfBounds(char[][] board, int r, int c)
     {
         return r < 0 || c < 0 || r >= board.length || c >= board[0].length;
     }
-    
     
     
     
@@ -159,13 +138,10 @@ class Solution {
     
     
     
-    
     class Trie 
     {
 
         static final int ALPHABET = 26; // total # number of characters
-
-
 
         TrieNode root;
 
