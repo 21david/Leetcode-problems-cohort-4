@@ -1,20 +1,29 @@
 class Solution {
+    int[] alphabetP = new int[26];
+    
     public List<Integer> findAnagrams(String s, String p) {
-        // 2685 ms, faster than 5%
-        // 114.6 mb, less than 5.01%
-        // Sometimes causes Time Limit Exceeded, so it's close to the time limit
+        // 1659 ms, faster than 7.32%
+        // 40.6 MB, less than 72.28%
         
         // for the example input, we can start a search at every index of s (up to and including s.length() - 3)
         // to check if those 3 letters are an anagram of p. If it is, add it to the final list.
         // for general input, we can start a search at every index of s up to and including s.length() - p.length()
         // to check if those p.length() letters are an anagram of p.
         // Time complexity: O(N * M), N is the # of chars in S, M is the # of chars in P
+        // Space complexity: O(N), N is the # of chars in S 
+        //   - we store an integer for every index of S that is the start of an anagram. In the worst
+        //     case, this could be all the indices of S
         
         if(p.length() > s.length())
             return new ArrayList<>();
         
+        // fill up the multiset for P, to be able to check for anagrams
+        for(int i = 0; i < p.length(); i++)
+            alphabetP[p.charAt(i) - 'a']++;
+        
         ArrayList<Integer> startIndices = new ArrayList<>();
         
+        // iterate through every possible index, looking for anagrams
         for(int i = 0; i <= s.length() - p.length(); i++)
         {
             if(isAnagram(s.substring(i, i + p.length()), p))
@@ -32,13 +41,9 @@ class Solution {
             return false;
         
         int[] alphabetS = new int[26];  // multiset, count the frequency of each character
-        int[] alphabetP = new int[26];
         
         for(int i = 0; i < s.length(); i++)
-        {
             alphabetS[s.charAt(i) - 'a']++;
-            alphabetP[p.charAt(i) - 'a']++;
-        }
         
         for(int i = 0; i < 26; i++)
             if(alphabetS[i] != alphabetP[i])
