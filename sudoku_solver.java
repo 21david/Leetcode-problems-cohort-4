@@ -2,8 +2,8 @@
 
 class Solution {
     public void solveSudoku(char[][] board) {
-        // 16 ms, faster than 50.18%
-        // 37 MB, less than 44.94%
+        // 7 ms, faster than 79.20%
+        // 37 MB, less than 45.61%
     	
     	solveSudokuHelp(board);
     }
@@ -16,7 +16,7 @@ class Solution {
     		for(int c = 0; c < 9; c++)
     		{
                 // skip if its a number
-    			if(Character.isDigit(board[r][c]))
+    			if(board[r][c] != '.')
     				continue;
     			
     			// if its an open cell, try all nums
