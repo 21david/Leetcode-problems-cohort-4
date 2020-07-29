@@ -21,7 +21,6 @@ class Solution {
         ListNode odd, even, evenStart;
         
         odd = head;
-        
         even = evenStart = head.next;
         
         while(odd.next != null)
@@ -35,6 +34,32 @@ class Solution {
             
             even.next = odd.next;
             even = even.next;
+        }
+        
+        odd.next = evenStart;
+        
+        return head;
+    }
+    
+    public ListNode oddEvenList2(ListNode head) {
+        // 0 ms, faster than 100.00%
+        // 42.2 MB, less than 5.13%
+        
+        if(head == null)
+            return null;
+        
+        ListNode odd, even, evenStart;
+        
+        odd = head;
+        even = evenStart = head.next;
+        
+        while(odd != null && odd.next != null && even != null && even.next != null)
+        {
+            odd.next = even.next;
+            odd = odd.next;
+            
+            even.next = odd.next;
+            even = odd.next;
         }
         
         odd.next = evenStart;
