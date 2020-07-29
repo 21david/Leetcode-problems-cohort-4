@@ -12,13 +12,14 @@ class LRUCache {
       keep track of the number of elements in the cache. The ArrayList will contain
       arrays of size 2 where the 1st element is the key and the 2nd element is the 
       value. A HashSet that stores the keys that we have can make it faster
-      because we can know what to do after a O(1) operation, instead of an O(N) 
-      search. (If we don't have the key, then we return -1 right away. If we do,
-      then we search through thr ArrayList to find it.)
+      because we can know what to do after searching the HashSet (an O(1) operation), 
+      instead of searching through the entire array (an O(N) operation) to find it.
+      (If we don't have the key, then we return -1 right away. If we do,
+      then we search through the ArrayList to find it.)
     Whenever an element is added, it is added to the end of the ArrayList. If we
       reached the capacity, we remove whatever is at the beginning of the ArrayList
       (index 0).
-    Whenever an element is accesses, we will search thruogh the ArrayList to find it,
+    Whenever an element is accessed, we will search thruogh the ArrayList to find it,
       and if we find it, move it to the end of the ArrayList and return the value.
       If we don't find it, we just return -1.
       
