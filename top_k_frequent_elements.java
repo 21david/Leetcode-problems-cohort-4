@@ -2,8 +2,53 @@
 
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        // 22 ms, faster than 25.90%
-        // 47.6 MB, less than 5.19%
+        // 9 ms, faster than 92.75%
+        // 42.2 MB, less than 21.57%
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        // Put all the elements into a map that counts the frequency of each number, O(N)
+        for(int n : nums)
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        
+        
+        // Put all the elements in the map into a PriorityQueue that has the max
+        // element as the root (a max heap basically), O(N)
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(b[1], a[1]));
+        Iterator it = map.keySet().iterator();
+        while(it.hasNext())
+        {
+            int key = (int) it.next();
+            
+            int[] entry = new int[2];
+            entry[0] = key;
+            entry[1] = map.get(key);
+            
+            pq.add(entry);
+        }
+        
+        // create array to store final answer
+        int[] answer = new int[k];
+        int a = 0;
+        
+        // Remove the top K elements and put the keys into the answer array, O(klogN)?
+        while(k > 0)
+        {
+            answer[a] = pq.poll()[0];
+            a++;
+            k--;
+        }
+        
+        return answer;
+    }
+    
+    
+    /* This solution takes the same approach as the above solution,
+    but uses a customly implemented MaxHeap data structure, instead of
+    the PriorityQueue data structure */
+    public int[] topKFrequent2(int[] nums, int k) {
+        // 11 ms, faster than 73.81%
+        // 42.2 MB, less than 19.57%
         
         HashMap<Integer, Integer> map = new HashMap<>();
         
