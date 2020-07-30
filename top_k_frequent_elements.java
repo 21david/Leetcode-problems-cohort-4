@@ -50,26 +50,34 @@ Test cases:
 
 [1,1,1,2,2,3]
 2
+
 output should be:  [1, 2]
  - there are three 1s and two 2s
 
 [1, 2, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6, 7, 7, 8, 9]
 2
+
 output should be: [5, 4]
  - there are four 5s and three 4s
 
 [6, 2, 5, 2, 6, 4, 1, 5, 3, 2, 6, 4, 2, 6, 1, 2, 2, 3, 1, 1, 6, 3]
 3
+
 output should be: [2, 6, 1]
  - there are six 2s, five 6s, and four 1s
  
  [7]
  1
+ 
  output should be: [7]
 
 */
 
-// Min heap implementation: 
+// Max heap implementation: 
+// This implementation stores arrays of size two,
+// and compares everything using the second element of each array
+// So we can store key-value pairs with this and sort them by their
+// value.
 public class MaxHeap {
     private int capacity = 10;
     private int size = 0;
