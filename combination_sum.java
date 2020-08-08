@@ -1,5 +1,9 @@
 //  https://leetcode.com/problems/combination-sum/
 
+/*
+I could probably optimize this with dynamic programming/memoization
+*/
+
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         // 105 ms, faster than 5.06%
